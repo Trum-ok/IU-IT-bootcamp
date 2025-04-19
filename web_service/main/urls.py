@@ -1,8 +1,7 @@
 from django.urls import path
+
 from main import views
-from main.auth_views import (
-    writer_login, moderator_login, logout
-)
+from main.auth_views import logout, moderator_login, writer_login
 
 urlpatterns = [
     path('', views.view_index, name='home'),

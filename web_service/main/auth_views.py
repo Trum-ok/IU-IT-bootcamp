@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
 from typing import Literal
+
+from django.shortcuts import redirect, render
 
 
 def writer_login(request):

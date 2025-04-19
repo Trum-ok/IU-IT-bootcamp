@@ -1,12 +1,11 @@
-from django.shortcuts import render, HttpResponse
-from main.decorators import role_required
-from django.conf import settings
-from minio import Minio
-from minio.error import S3Error
-import bcrypt
 import json
 import uuid
-
+import bcrypt
+from django.conf import settings
+from django.shortcuts import HttpResponse, render
+from main.decorators import role_required
+from minio import Minio
+from minio.error import S3Error
 
 def view_index(request):
     """Главная страница"""
@@ -16,8 +15,34 @@ def view_index(request):
                 "name": "test",
                 "descript": "test"
             }
-        ]
+        ],
+        "images": []
     }
+
+    minio_client = Minio(
+        settings.MINIO_ENDPOINT,
+        access_key=settings.MINIO_ACCESS_KEY,
+        secret_key=settings.MINIO_SECRET_KEY,
+        secure=settings.MINIO_USE_HTTPS
+    )
+    try:
+        objects = minio_client.list_objects(
+            settings.MINIO_BUCKET_NAME,
+            prefix="organizations/"
+        )
+
+        for obj in objects:
+
+            image_url = minio_client.presigned_get_object(
+                settings.MINIO_BUCKET_NAME,
+                obj.object_name
+            )
+
+            data["images"].append({"url": image_url})
+
+    except S3Error as exc:
+        print("Ошибка при получении изображений из MinIO:", exc)
+
     if not request.session:
         data = {
             "user_id": request.session["id"],
@@ -34,12 +59,9 @@ def search_posts(request):
 def view_post(request, post_id):
     """Страница публикации"""
     if request.method == 'POST':
-        temp_data = {
-            0: ["name", "descript"],
-            1: ["name1", "descript1"],
-            2: ["name2", "descript2"]
-        }
+        temp_data = []
         posts = json.dumps(temp_data[post_id], ensure_ascii=False)
+
     return render(request, "post.html")
 
 
@@ -79,7 +101,7 @@ def update_post(request):
 
 @role_required('moderator')
 def create_organization(request):
-    """Создание организации"""
+    """Создание организации с загрузкой изображения в MinIO"""
     if request.method == 'POST':
         name = request.POST.get('name')
         description = request.POST.get('description')
@@ -87,14 +109,6 @@ def create_organization(request):
 
         image = request.FILES.get('image')
         if image:
-            minio_client = Minio(
-                settings.MINIO_ENDPOINT,
-                access_key=settings.MINIO_ACCESS_KEY,
-                secret_key=settings.MINIO_SECRET_KEY,
-                secure=settings.MINIO_USE_HTTPS
-            )
-            file_name = f"{uuid.uuid4()}_{image.name}"
-
             try:
                 minio_client = Minio(
                     settings.MINIO_ENDPOINT,

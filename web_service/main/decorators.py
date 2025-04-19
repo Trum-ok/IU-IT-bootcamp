@@ -1,5 +1,5 @@
-from django.shortcuts import redirect
 from django.http import HttpResponseForbidden
+from django.shortcuts import redirect
 
 
 def login_required(view_func):
