@@ -60,7 +60,7 @@ def view_post(request, post_id):
     """Страница публикации"""
     if request.method == 'POST':
         temp_data = []
-        posts = json.dumps(temp_data[post_id], ensure_ascii=False)
+        posts = json.dumps(temp_data[int(post_id)], ensure_ascii=False)
 
     return render(request, "post.html")
 
