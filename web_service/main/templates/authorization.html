@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="btn-group" role="group" aria-label="Basic example">
+    <a href="{% url 'writer_login' %}">
+        <button type="button" class="btn btn-primary">Войти как писатель</button>
+    </a>
+    <a href="{% url 'moderator_login' %}">
+        <button type="button" class="btn btn-primary">Войти как модератор</button>
+    </a>
+  </div>
+{% endblock %}

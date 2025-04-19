@@ -1,12 +1,15 @@
-<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 
-<div class="confirmation-container">
-    <h1>Удалить автора</h1>
+<div class="container"> 
+    <div class="confirmation-container">
+        <h1>Удалить автора</h1>
 
-    <form method="post">
-        <div class="form-actions">
-            <button type="submit" class="btn danger">Удалить</button>
-            <a href="{% url 'writers_list' %}" class="btn secondary">Отмена</a>
-        </div>
-    </form>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+                <a href="{% url 'writers_list' %}" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
 </div>

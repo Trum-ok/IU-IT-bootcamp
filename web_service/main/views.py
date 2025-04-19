@@ -48,7 +48,10 @@ def view_index(request):
 
 def search_posts(request):
     """Страница поиска публикаций"""
-    return render(request, "searching_page.html")
+    if request.method == "POST":
+        search_data = request.POST.get("search_query")
+        print(search_data)
+    return HttpResponse("Ok")
 
 
 def view_post(request, post_id):
@@ -141,17 +144,6 @@ def create_organization(request):
     return render(request, "create_organization.html")
 
 
-@role_required("moderator")
-def delete_organization(request):
-    """Удаление организации"""
-    if request.method == "POST":
-        organization_id = request.POST.get("organization_id")
-        # удаление организации по id
-        print(organization_id)
-
-    return HttpResponse("Ok")
-
-
 def view_organizations(request):
     """Просмотр всех доступных организаций"""
     data = {"organizations": [{"name": "test", "descript": "test"}]}
@@ -162,6 +154,13 @@ def view_organizations(request):
 @role_required("moderator")
 def create_writer(request):
     """Создание писателя"""
+    data = {
+        "organizations": [
+            "Москва",
+            "США",
+            "Ура"
+        ]
+    }
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -171,7 +170,7 @@ def create_writer(request):
             password.encode(ENCODING), bcrypt.gensalt(rounds=ROUNDS)
         )
         print(username, hashed_password, organization)
-    return render(request, "create_writer.html")
+    return render(request, "create_writer.html", context=data)
 
 
 @role_required("moderator")
@@ -181,3 +180,7 @@ def delete_writer(request):
         user_id = request.POST.get("id")
         print(user_id)
     return HttpResponse("Ok")
+
+
+def authorization(request):
+    return render(request, "authorization.html")
