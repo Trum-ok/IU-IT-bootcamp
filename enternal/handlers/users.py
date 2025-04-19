@@ -17,7 +17,7 @@ async def get_users_info():
     pass
 
 
-@user_router.create('/user/create')
+@user_router.post('/user/create')
 async def create_user(user: User):
     return {
         'id': user.id,
