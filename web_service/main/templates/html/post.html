@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .box_title {
+            width: 80%;
+            padding: 10px;
+            background-color: lightgray;
+            border-radius: 0 25px 25px 0;
+            font-size: 24px;
+            font-family: Calibri, sans-serif;
+            margin: 10px 0;
+            align-self: flex-start
+        }
+
+        .image-container {
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .img {
+            width: 100%;
+            max-width: 600px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .box_tegs,
+        .box_text {
+            width: 80%;
+            padding: 20px;
+            background-color: rgb(200, 200, 200);
+            border-radius: 30px;
+            font-size: 18px;
+            font-family: Calibri, sans-serif;
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box_title">
+        Будет название статьи
+    </div>
+    
+    <div class="image-container">
+        <img src="https://via.placeholder.com/400x180" alt="Пример фото 1" class="img">
+    </div>
+
+    <div class="box_tegs">
+        Выведем сюда всю фигню по тексту
+    </div>
+    
+    <div class="box_text">
+        Сюда весь текст
+    </div>
+</body>
+</html>
