@@ -3,24 +3,6 @@
 {% block content %}
 <div class="container">
     <h1 class="my-4">Активные пользователи</h1>
-    
-    <div class="row">
-        {% if user_id %}
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ user_id }}</h5>
-                        </div>
-                    </div>
-                </div>
-        {% else %}
-            <div class="col-12">
-                <div class="alert alert-info" role="alert">
-                    Пользователь не авторизован
-                </div>
-            </div>
-        {% endif %}
-    </div>
     {% for post in posts %}
         <p>{{ post.name }} | {{ post.descript }}</p>
     {% endfor %}
