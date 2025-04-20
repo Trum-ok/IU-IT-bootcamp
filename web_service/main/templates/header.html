@@ -9,7 +9,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    <input type="search" class="form-control" placeholder="Введите запрос..."
+                                    <input type="search" class="form-control" placeholder="Введите поисковый запрос"
                                         aria-label="Search" name="search_query">
                                     <button class="btn btn-primary" type="submit">
                                         Найти
@@ -21,7 +21,7 @@
                 </form>
             </div>
 
-            <div class="col-md-4 d-flex justify-content-end">  <!-- Добавлено d-flex justify-content-end -->
+            <div class="col-md-4 d-flex justify-content-end">
                 {% if 'user_id' in request.session %}
                 <a href="{% url 'logout' %}">
                     <button class="btn btn-secondary">Выйти</button>

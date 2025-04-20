@@ -3,13 +3,22 @@
 {% block content %}
 <div class="container">
     <h1 class="my-4">Активные пользователи</h1>
-    {% for post in posts %}
-        <p>{{ post.name }} | {{ post.descript }}</p>
-    {% endfor %}
-
-    {% for image in images %}
-        <img src="{{ image.url }}">
-    {% endfor %}
-   
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'view_post' post.id %}" class="text-decoration-none">
+                <div class="card h-100">
+                    <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.content }}</p>
+                        <p class="card-text"><small class="text-muted">Автор: {{ post.author_id }}</small></p>
+                        <p class="card-text"><small class="text-muted">Дата публикации: {{ post.date }}</small></p>
+                    </div>
+                </div>
+            </a> {# Close link #}
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
