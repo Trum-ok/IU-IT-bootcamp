@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .search-input {
+            width: 70%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .section-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .section:hover {
+            transform: translateY(-3px);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        p {
+            color: #666;
+            margin: 0;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 600px) {
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-input {
+                width: 90%;
+            }
+
+            .section-img {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Введите поисковый запрос...">
+    </div>
+
+    <div class="section-grid">
+        <div class="section">
+            <img src="https://via.placeholder.com/400x180" alt="Пример фото 1" class="section-img">
+            <h2>Название 1</h2>
+            <p>Описание раздела с фотографией и текстовым содержимым для примера</p>
+        </div>
+
+        <div class="section">
+            <img src="https://via.placeholder.com/400x180" alt="Пример фото 2" class="section-img">
+            <h2>Название 2</h2>
+            <p>Еще одно описание раздела с изображением и текстовым наполнением</p>
+        </div>
+
+        <div class="section">
+            <img src="https://via.placeholder.com/400x180" alt="Пример фото 3" class="section-img">
+            <h2>Название 3</h2>
+            <p>Текст описания раздела с демонстрационной фотографией</p>
+        </div>
+
+        <div class="section">
+            <img src="https://via.placeholder.com/400x180" alt="Пример фото 4" class="section-img">
+            <h2>Название 4</h2>
+            <p>Пример содержимого секции с изображением и описанием</p>
+        </div>
+    </div>
+</body>
+</html>

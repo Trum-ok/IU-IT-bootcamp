@@ -1,0 +1,17 @@
+services:
+  minio:
+    container_name: minio
+    image: minio/minio
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    command: server /data --console-address ":${MINIO_PORT}"
+    ports:
+      - "9000:9000"
+      - "${MINIO_PORT}:${MINIO_PORT}"
+    volumes:
+      - minio_data:/data
+
+volumes:
+  minio_data:
+  postgres_data:

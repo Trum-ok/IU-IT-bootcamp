@@ -1,0 +1,14 @@
+{
+    "postman.settings.dotenv-detection-notification-visibility": false,
+    "[python]": {
+        "editor.rulers": [
+                { "column": 80,  "color": "#04de6699", },
+        ],
+        "editor.minimap.maxColumn": 132,
+        "editor.wordWrap": "off",
+        "files.eol": "\n",
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+    } 
+}

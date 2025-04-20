@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Вход в систему</h2>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+            <input name="username" type="text" class="form-control" id="floatingInput username"
+                placeholder="Имя пользователя" required>
+            <label for="floatingInput">Имя пользователя</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input name="password" type="password" class="form-control" id="floatingPassword password"
+                placeholder="Пароль" required>
+            <label for="floatingPassword">Пароль</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
+</div>
+{% endblock %}

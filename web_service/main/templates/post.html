@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Детали поста</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <a href="{% url 'view_post' post.id %}" class="text-decoration-none">
+                <div class="card">
+                    <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}"> {# Make sure to use .url #}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.content }}</p>
+                        <p class="card-text"><small class="text-muted">Автор: {{ post.author_id }}</small></p>
+                        <p class="card-text"><small class="text-muted">Дата публикации: {{ post.date }}</small></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

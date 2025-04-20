@@ -1,0 +1,27 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+<div class="container">
+    <h1>Список авторов</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Имя пользователя</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for writer in writers %}
+            <tr>
+                <td>{{ writer.username }}</td>
+                <td>
+                    <form method="post" action="{% url 'delete_writer' writer.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
