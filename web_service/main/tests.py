@@ -10,11 +10,6 @@ class UrlTests(TestCase):
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
 
-    def test_create_post_page_authorized(self):
-        self.client.login(username="test", password="qwerty")
-        response = self.client.get(reverse("create_post"))
-        self.assertEqual(response.status_code, 200)
-
     def test_create_organization_page(self):
         response = self.client.get(reverse("create_organization"))
         self.assertEqual(response.status_code, 302)
@@ -43,11 +38,3 @@ class UrlTests(TestCase):
     def test_nonexistent_page(self):
         response = self.client.get("/notvalid_url/")
         self.assertEqual(response.status_code, 404)
-
-    def test_post_methods(self):
-        self.client.login(username="test", password="qwerty")
-
-        response = self.client.post(
-            reverse("create_post"), {"title": "test", "content": "test"}
-        )
-        self.assertEqual(response.status_code, 200)

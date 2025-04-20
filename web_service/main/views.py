@@ -8,6 +8,7 @@ from django.shortcuts import HttpResponse, render, redirect
 from main.decorators import role_required
 from minio import Minio
 
+
 ENCODING = "utf-8"
 ROUNDS = 12
 
@@ -57,7 +58,6 @@ def view_post(request, post_id):
             "http://127.0.0.1:9999/postspost_by_id/", params=params
         )
         response_data = response.json()
-
     return render(request, "post.html", context=response_data)
 
 
