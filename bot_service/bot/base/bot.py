@@ -12,8 +12,6 @@ from bot.config import Config
 from bot.logger import BOT_LOGGER, setup_logging
 from bot.routers import routers
 
-from bot.store.database.db import Database
-
 
 __all__ = (
     "ITSBot",
@@ -22,13 +20,13 @@ __all__ = (
 
 
 class ITSBot(Bot):
-    def __init__(self, token: str, defaults: Defaults, database: "Database"):
+    def __init__(self, token: str, defaults: Defaults, ports: "Ports"):
         super().__init__(token=token, default=defaults)
-        self.db = database
+        self.ports = ports
         self.logger = logging.getLogger(BOT_LOGGER)
 
 
-async def graceful_shutdown(bot: "ITSBot", dp: Dispatcher) -> NoReturn:
+async def graceful_shutdown(bot: "ITSBot", dp: Dispatcher) -> None:
     bot.logger.warning("Starting graceful shutdown...")
 
     await bot.delete_webhook(drop_pending_updates=False)
@@ -41,16 +39,11 @@ async def graceful_shutdown(bot: "ITSBot", dp: Dispatcher) -> NoReturn:
         await bot.session.close()
         bot.logger.info("Session closed")
 
-    if bot.db:
-        await bot.db.disconnect()
-        bot.logger.info("DB disconnected")
-
     tasks = [t for t in asyncio.all_tasks() if t is not asyncio.current_task()]
     [task.cancel() for task in tasks]
     await asyncio.gather(*tasks, return_exceptions=True)
 
     bot.logger.warning("Shutdown complete!")
-    sys.exit(0)
 
 
 def register_shutdown_handlers(bot: Bot, dp: Dispatcher) -> None:
@@ -66,11 +59,9 @@ async def run_bot(config_path: str) -> ITSBot:
     setup_logging()
 
     config = Config(config_path)
-    database = Database(config)
+    ports = Ports(config)
 
-    await database.connect()
-
-    bot = ITSBot(token=config.tg.token, defaults=DEFAULTS, database=database)
+    bot = ITSBot(token=config.tg.token, defaults=DEFAULTS, ports=ports)
     dp: Dispatcher = create_dispatcher(config)
 
     setup_routers(dp, routers)

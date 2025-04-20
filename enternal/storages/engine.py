@@ -11,20 +11,20 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import DeclarativeBase
 
-from bot.store.database.sa_base import Base
+from storages.models import Base
 
 if TYPE_CHECKING:
-    from bot.config import Config
+    from config import Config
 
 
-class Database:
+class Engine:
     def __init__(self, config: "Config"):
         self._engine: AsyncEngine | None = None
         self.metadata: type[MetaData] = Base.metadata
-        self.config = config.db
+        self.config = config.pg
         self.async_session_factory = None
         self._db: type[DeclarativeBase] = Base
-        self.session: async_sessionmaker[AsyncSession] | None = None
+        # self.session: async_sessionmaker[AsyncSession] | None = None
 
     @property
     def engine(self) -> AsyncEngine:
@@ -40,16 +40,16 @@ class Database:
                 bind=self.engine,
                 expire_on_commit=False,
                 autoflush=False,
-                class_=AsyncSession,
+                class_=AsyncSession
             ),
-            scopefunc=current_task,
+            scopefunc=current_task
         )
-        self.session = async_sessionmaker(
-            bind=self.engine,
-            expire_on_commit=False,
-            autoflush=False,
-            class_=AsyncSession,
-        )
+        # self.session = async_sessionmaker(
+        #         bind=self.engine,
+        #         expire_on_commit=False,
+        #         autoflush=False,
+        #         class_=AsyncSession
+        #     )
 
         async with self.engine.begin() as conn:
             await conn.run_sync(self.metadata.create_all)

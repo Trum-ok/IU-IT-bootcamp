@@ -1,24 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Создание организации</h2>
-{% if error %}
-<div class="alert alert-danger">{{ error }}</div>
-{% endif %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div>
-        <label for="name">Название организации</label>
-        <input type="text" id="name" name="name" required>
-    </div>
-    <div>
-        <label for="description">Описание:</label>
-        <input type="text" id="description" name="description" required>
-    </div>
-    <div>
-        <label for="image">Изображение:</label>
-        <input type="file" id="image" name="image">
-    </div>
-    <button type="submit">Войти</button>
-</form>
+<div class="container">
+    <h2>Создание организации</h2>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Название организации</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Описание:</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Изображение:</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
+</div>
 {% endblock %}

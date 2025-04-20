@@ -28,7 +28,7 @@ def login(request, user_role: Literal["writer", "moderator"]):
             return redirect("home")
 
         return render(
-            request, "login.html", {"error": "Неверные учетные данные"}
+            request, "login.html"
         )
 
     return render(request, "login.html")

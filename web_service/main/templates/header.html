@@ -1,0 +1,37 @@
+{% load static %}
+<header>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <form method="post" id="search" action="/posts/search/">
+                    {% csrf_token %}
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <input type="search" class="form-control" placeholder="Введите поисковый запрос"
+                                        aria-label="Search" name="search_query">
+                                    <button class="btn btn-primary" type="submit">
+                                        Найти
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-4 d-flex justify-content-end">
+                {% if 'user_id' in request.session %}
+                <a href="{% url 'logout' %}">
+                    <button class="btn btn-secondary">Выйти</button>
+                </a>
+                {% else %}
+                <a href="{% url 'authorization' %}">
+                    <button class="btn btn-secondary">Войти</button>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>

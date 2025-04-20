@@ -4,7 +4,13 @@ version = "0.1.0"
 description = "BMSTU it-bootcamp"
 readme = "README.md"
 requires-python = ">=3.12.9"
-dependencies = []
+dependencies = [
+    "asyncpg>=0.30.0",
+    "fastapi[async,standart]>=0.115.12",
+    "pydantic>=2.11.3",
+    "python-dotenv>=1.1.0",
+    "sqlalchemy>=2.0.40",
+]
 
 
 [tool.ruff]

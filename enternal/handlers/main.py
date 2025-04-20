@@ -1,8 +1,9 @@
 from fastapi import APIRouter
 
-router = APIRouter()
+main_router = APIRouter()
 
-@router.get("/posts")
+
+@main_router.get("/posts")
 async def get_posts():
     return {
         'Cause they feel so empty without me'

@@ -1,27 +1,34 @@
-from typing import Optional
-
-from domains import Publication, User
-
-
-def get_post_by_id(post_id: str) -> Optional["Publication"]:
-    """Получение публикации по ID"""
+from enternal.services.models.domains import Publication
+from enternal.storages.sqlalchemy_db import db
 
 
-def get_posts_by_author(author: "User") -> list["Publication"]:
-    """Получение публикаций конкретного автора"""
+async def get_post_by_id(post_id: str) -> Publication | None:
+    return await db.get_publication(post_id)
 
 
-def create_post(publication_data: "Publication") -> "Publication":
-    """Создание новой публикации"""
+async def get_posts() -> list[Publication]:
+    return await db.get_publications()
 
 
-def update_post(post_id: str, update_data: dict) -> "Publication":
-    """Обновление существующей публикации"""
+async def create_post(post: Publication) -> None:
+    return await db.add_publication(
+        title=post.title,
+        content=post.content,
+        image_url=post.main_image_url,
+        author_id=post.author,
+        created_at=post.created_at
+    )
 
 
-def delete_post(post_id: str) -> bool:
-    """Удаление публикации"""
+async def update_post(updated_post: Publication) -> None:
+    return await db.update_publication(
+        title=updated_post.title,
+        content=updated_post.content,
+        image_url=updated_post.main_image_url,
+        author_id=updated_post.author,
+        created_at=updated_post.created_at
+    )
 
 
-def search_posts(query: str) -> list["Publication"]:
-    """Поиск публикаций по текстовому запросу"""
+async def delete_post(post_id: str) -> None:
+    await db.remove_publication(post_id)
