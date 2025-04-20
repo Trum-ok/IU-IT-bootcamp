@@ -1,8 +1,9 @@
 import logging
 import sys
 
+from logging.handlers import RotatingFileHandler
+
 BOT_LOGGER = "bot"
-# DP_LOGGER = "bot.dispatcher"
 DP_LOGGER = "aiogram.dispatcher"
 EVENT_LOGGER = "bot.event"
 MW_LOGGER = "bot.middlewares"
@@ -26,11 +27,11 @@ logging.basicConfig(
     datefmt=DATE_FORMAT,
     handlers=[
         logging.StreamHandler(),
-        # RotatingFileHandler(  # TODO: расскоментировать перед релизом (мб)
-        #     "bot.log",
-        #     maxBytes=5*1024*1024
-        #     backupCount=3
-        # )
+        RotatingFileHandler(
+            "bot.log",
+            maxBytes=5 * 1024 * 1024,
+            backupCount=3,
+        ),
     ],
 )
 

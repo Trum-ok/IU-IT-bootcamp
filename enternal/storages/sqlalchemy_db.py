@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy import select, delete
 
 from .models import Base, Company, Publication, User
-from .config import CONTENT_AGREGATOR_DB
+from config import PostgreConfig
 
 from .storage import Database
 from .exceptions import UserExists, UserNotFound, PublicationNotFound
@@ -16,7 +16,7 @@ from .exceptions import UserExists, UserNotFound, PublicationNotFound
 
 class ContentAgregatorDatabase(Database):
     def __init__(self):
-        self.db_name = CONTENT_AGREGATOR_DB
+        self.db_name = PostgreConfig.database_url
         self.engine = create_async_engine(self.db_name, echo=False)
         self.SessionLocal =  async_sessionmaker(bind=self.engine, expire_on_commit=False)
 
