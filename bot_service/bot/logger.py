@@ -1,6 +1,5 @@
 import logging
 import sys
-
 from logging.handlers import RotatingFileHandler
 
 BOT_LOGGER = "bot"
