@@ -6,6 +6,11 @@ from aiohttp.web_response import Response
 from aiohttp_apispec import docs, request_schema, response_schema
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.base.base_accessor import BaseAccessor
+from app.web.app import View
+from app.web.schemes import ErrorResponseSchema, OkResponseSchema
+from app.web.utils import json_response
 from storage.app.models import Company, Publication, User
 from storage.app.schemas import (
     CompanySchema,
@@ -15,11 +20,6 @@ from storage.app.schemas import (
     UserCreateSchema,
     UserSchema,
 )
-
-from app.base.base_accessor import BaseAccessor
-from app.web.app import View
-from app.web.schemes import ErrorResponseSchema, OkResponseSchema
-from app.web.utils import json_response
 
 
 class PublicationView(View):

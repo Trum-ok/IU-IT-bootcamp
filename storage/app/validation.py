@@ -1,6 +1,7 @@
 import json
 import typing
-from typing import Mapping, NoReturn
+from collections.abc import Mapping
+from typing import NoReturn
 
 from aiohttp.web import (
     HTTPBadRequest,
@@ -99,7 +100,6 @@ def validation_error_handler(
 ) -> NoReturn:
     for errors in error.messages.values():
         for err in errors.values():
-            print(err)
             error_type = None
             if err[0] == REQUIRED:
                 error_type = REQUIRED

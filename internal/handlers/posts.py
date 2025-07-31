@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from services.domains import Publication
 from services.posts import (
     create_post,

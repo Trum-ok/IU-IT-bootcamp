@@ -4,13 +4,13 @@ from aiohttp.web import (
     View as AiohttpView,
 )
 from aiohttp_apispec import setup_aiohttp_apispec
-from storage.app.validation import validation_error_handler
 
 from app.database.db import Database
 from app.web.config import Config, setup_config
 from app.web.logger import setup_logging
 from app.web.middlewares import setup_middlewares
 from app.web.routes import setup_routes
+from storage.app.validation import validation_error_handler
 
 
 class Application(AiohttpApplication):

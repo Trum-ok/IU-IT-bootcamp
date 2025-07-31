@@ -1,19 +1,12 @@
-from typing import TYPE_CHECKING
-
 from aiogram import Router
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
-
-if TYPE_CHECKING:
-    from bot.base.bot import ITSBot
 
 main_router = Router(name="main")
 
 
 @main_router.message(CommandStart())
 async def start(message: Message) -> None:
-    bot: ITSBot = message.bot
-
     welcome_text = (
         "👋 Приветствую в новостном боте МГТУ им. Н.Э. Баумана!\n\n"
         "Я буду присылать тебе свежие новости, анонсы мероприятий и важные объявления "  # noqa: E501

@@ -1,24 +1,24 @@
-class UserNotFound(Exception):
+class UserNotFoundError(Exception):
     pass
 
 
-class UserExists(Exception):
+class UserExistsError(Exception):
     pass
 
 
-class CompanyNotFound(Exception):
+class CompanyNotFoundError(Exception):
     pass
 
 
-class SubscriptionNotFound(Exception):
+class SubscriptionNotFoundError(Exception):
     pass
 
 
-class SubscriberNotFound(Exception):
+class SubscriberNotFoundError(Exception):
     pass
 
 
-class PublicationNotFound(Exception):
+class PublicationNotFoundError(Exception):
     pass
 
 

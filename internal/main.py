@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-
 from handlers.organizations import org_router
 from handlers.posts import post_router
 from handlers.subscribers import subscriber_router

@@ -155,8 +155,6 @@ def create_writer(request):
         hashed_password = bcrypt.hashpw(
             password.encode(ENCODING), bcrypt.gensalt(rounds=ROUNDS)
         )
-
-        print(username, hashed_password, organization)
     return render(request, "create_writer.html", context=response_data)
 
 
@@ -165,7 +163,6 @@ def delete_writer(request):
     """Удаления писателя"""
     if request.method == "POST":
         user_id = request.POST.get("id")
-        print(user_id)
     return render(request, "delete_writer.html")
 
 

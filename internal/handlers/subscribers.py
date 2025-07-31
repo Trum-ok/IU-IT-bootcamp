@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from services.domains import Subscriber
 
 subscriber_router = APIRouter(tags=["Subscribers"])

@@ -1,6 +1,7 @@
-from typing import Any, Awaitable, Callable
+from collections.abc import Awaitable, Callable
+from typing import Any
 
-from aiogram import BaseMiddleware, Bot, Dispatcher, types
+from aiogram import BaseMiddleware, types
 
 
 class MetricsMiddleware(BaseMiddleware):
@@ -45,7 +46,8 @@ class MetricsMiddleware(BaseMiddleware):
 #         """Return current metrics"""
 #         async def _get():
 #             async with self.lock:
-#                 avg_time = self.total_time / self.total_requests if self.total_requests else 0
+#                 avg_time = self.total_time / self.total_requests
+#                 if self.total_requests else 0
 #                 rps = len(self.timestamps)
 #                 return {
 #                     'avg_time': avg_time,

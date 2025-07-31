@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Any
 
 from sqlalchemy import DateTime, ForeignKey, Integer, String
 from sqlalchemy.ext.asyncio import AsyncAttrs

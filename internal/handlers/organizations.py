@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from services.domains import Company
 
 org_router = APIRouter(tags=["Organizations"])

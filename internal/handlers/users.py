@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from services.domains import User
 from services.users import (
     add_user,

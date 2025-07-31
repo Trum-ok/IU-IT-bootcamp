@@ -4,12 +4,11 @@ from pathlib import Path
 from typing import List
 from uuid import uuid4
 
+from config import PostgreConfig
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-from config import PostgreConfig
-
-from .exceptions import PublicationNotFound, UserExists, UserNotFound
+from .exceptions import PublicationNotFoundError, UserExistsError, UserNotFoundError
 from .models import Base, Company, Publication, User
 from .storage import Database
 
@@ -41,7 +40,7 @@ class ContentAgregatorDatabase(Database):
     async def remove_publication(self, publication_id: str) -> None:
         publication = await self.get_publication(publication_id)
         if publication is None:
-            raise PublicationNotFound
+            raise PublicationNotFoundError
         else:
             async with self.SessionLocal() as session:
                 stmt = delete(Publication).where(Publication.id == publication_id)
@@ -80,7 +79,7 @@ class ContentAgregatorDatabase(Database):
     ) -> None:
         publication = await self.get_publication(publication_id)
         if publication is None:
-            raise PublicationNotFound
+            raise PublicationNotFoundError
         else:
             async with self.SessionLocal() as session:
                 publication.title = title
@@ -127,7 +126,7 @@ class ContentAgregatorDatabase(Database):
     ) -> None:
         user = await self.get_user_by_login(login)
         if user is not None:
-            raise UserExists
+            raise UserExistsError
         else:
             user_id = str(uuid4())
             async with self.SessionLocal() as session:
@@ -144,7 +143,7 @@ class ContentAgregatorDatabase(Database):
     async def remove_user(self, id: str) -> None:
         user = await self.get_user_by_id(id)
         if user is None:
-            raise UserNotFound
+            raise UserNotFoundError
         else:
             async with self.SessionLocal() as session:
                 stmt = delete(User).where(User.id == id)
